@@ -13,7 +13,6 @@
 #
 # Modifications and additional algorithms:
 # Copyright (c) 2024, Youngjun Park (pyoungj09@gmail.com)
-# All rights reserved.
 #
 # Biopython UPGMA documentation:
 # https://biopython.org/docs/dev/api/Bio.Phylo.TreeConstruction.html
