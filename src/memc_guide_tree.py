@@ -173,14 +173,15 @@ class MEMCGuideTree:
         # Step 3. Initialize the UnionFind data structure, 
         # clades, and height.
         uf = UnionFind(self.tsp_order_seq_name)
-        clades = {
-            i: BaseTree.Clade(None, self.tsp_order_seq_name[i]) 
-            for i in range(self._n)}
-        height = {}
+        clades = [
+            BaseTree.Clade(None, self.tsp_order_seq_name[i])
+            for i in range(self._n)
+        ]
+        height = np.zeros(self._n, dtype=float)
         
         # Step 4. Construct the guide tree.
         # Repeat until there is only one clade left.
-        while len(clades) > 1:
+        while len(self.sorted_dm) > 1:
             
             # (index)-th and (index+1)-th sequences are united.
             # The distance between them is dist.
@@ -203,9 +204,9 @@ class MEMCGuideTree:
             
             # deleted_root is the root that was merged.
             if united_root == uf_root_1:
-                delted_root = uf_root_2
+                deleted_root = uf_root_2
             else:
-                delted_root = uf_root_1
+                deleted_root = uf_root_1
 
             clade1 = clades[uf_root_1]
             clade2 = clades[uf_root_2]
@@ -233,10 +234,10 @@ class MEMCGuideTree:
                 )
             
             clades[united_root] = inner_clade
-            del clades[delted_root]
+            clades[deleted_root] = None
             
-            if delted_root in height:
-                del height[delted_root]
+            if height[deleted_root] > 0:
+                height[deleted_root] = 0.0
 
             # Save the height of the united clade.
             height[united_root] = dist / 2
