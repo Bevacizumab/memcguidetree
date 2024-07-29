@@ -81,7 +81,9 @@ All these implementations are based on Biopython with modifications by the autho
 - WPGMC [1]
 
 References to classical algorithms: 
+
 [1] [Milligan, G.W. Ultrametric hierarchical clustering algorithms. Psychometrika 44, 343-346 (1979)](https://doi.org/10.1007/BF02294699)
+
 [2] [Kazutaka Katoh, John Rozewicki, Kazunori D Yamada, MAFFT online service: multiple sequence alignment, interactive sequence choice and visualization, Briefings in Bioinformatics, Volume 20, Issue 4, July 2019, Pages 1160-1166](https://doi.org/10.1093/bib/bbx108)
 
 
