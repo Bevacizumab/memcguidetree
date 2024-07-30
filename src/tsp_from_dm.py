@@ -96,6 +96,7 @@ def tsp_to_file(dm_file_path: str,
     
     Example Usage:
     --------------
+    >>> from tsp_from_dm import *
     >>> dm_file_path = 'dm.txt'
     >>> is_classical = False  # D-Wave Quantum Annealer.
     >>> tsp_order_output_file_path = 'tsp_order.txt'
