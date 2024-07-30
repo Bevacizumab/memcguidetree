@@ -9,7 +9,7 @@ The minimum evolution is related to the minimum total sum of branch lengths. The
 Quantum annealers can provide solutions to TSPs with scalability. Our algorithm, implemented in `src/memc_guide_tree.py`, can construct a guide tree from a given TSP solution with a linear time complexity, O(N).
 When constructing guide trees, the molecular clock hypothesis is used.
 
-We designed our algorithm to produce guide trees that can be used for MAFFT.
+We designed our algorithm to produce guide trees that can be used for [MAFFT](https://mafft.cbrc.jp/alignment/software/).
 Because it requires sequence names in the guide trees to be named as 1, 2, ... n, we followed that convention in this code.
 The guide trees constructed by our algorithm must be converted to the native tree format of MAFFT.
 This can be done using the [ruby script](https://mafft.cbrc.jp/alignment/software/newick2mafft.rb) provided by MAFFT.
@@ -23,24 +23,59 @@ If you want to use [BAliBASE 3.0](https://www.lbgi.fr/balibase/), use [this git 
 
 
 # Example Usage:
-1. `memc_guide_tree.py`
-```python
-from memc_guide_tree import MEMCGuideTree
 
-dm_path = 'dm.txt'  # Use actual file path
-tsp_path = 'tsp.txt'  # Use actual file path
-output_path = 'output.dnd'  # Use actual file path
+This project constructs guide trees for [MAFFT](https://mafft.cbrc.jp/alignment/software/).
 
-memc = MEMCGuideTree(dm_path, tsp_path, output_path)
-memc.guide_tree_to_file()  # Save the guide tree.
+
+
+## Step 1: Get a Distance Matrix from an MSA Program
+
+To generate a distance matrix using MAFFT, use the following commands:
+
+For FFT-NS-i:
+```bash
+mafft --retree 0 --maxiterate 0 --distout input_file
+```
+For L-INS-i:
+```bash
+mafft --localpair --maxiterate 0 --distout input_file
+```
+Note that there should be no output file directory in the command.
+This command generates a distance matrix in a `.hat2` file in the same directory as the input file.
+
+A typical output format:
+```
+    1
+    (# of seqs)
+ (some float)
+   1. =(seq1_name)
+   2. =(seq2_name)
+   3. =(seq3_name)
+   4. =(seq4_name)
+ d(1,2) d(1,3) d(1,4)
+ d(2,3) d(2,4)
+ d(3,4)
+```
+where `d(i,j)` represents the distance between the i-th and the j-th sequences.
+The default option outputs distances to the three decimal points.
+Modify the `WriteFloatHat2_pointer_halfmtx` function in `io.c` to print more decimal points, at least five or six, for more accurate guide trees.
+
+`memc_guide_tree.py` and `classic_guide_tree.py` expect a distance matrix saved as, for example:
+```
+0.00000 d(1,2)  d(1,3)  d(1,4)
+d(1,2)  0.00000 d(2,3)  d(2,4)
+d(1,3)  d(2,3)  0.00000 d(3,4)
+d(1,4)  d(2,4)  d(3,4)  0.00000
 ```
 
-memc_guide_tree requires `unionfind.py` implemented by [Debajyoti Nandi](https://github.com/deehzee/unionfind).
-`unionfind.py` is under the MIT license and its copy is provided in this repository with the same file name.
 
 
-2. `tsp_from_dm.py`
+## Step 2. Solve a TSP
+
+Use `tsp_from_dm.py` to solve the TSP:
 ```python
+from tsp_from_dm.py import *
+
 dm_file_path = 'dm.txt'  # Use actual file path
 is_classical = False  # D-Wave Quantum Annealer (LeapHybridSampler).
 tsp_order_output_file_path = 'tsp_order.txt'  # Use actual file path
@@ -59,7 +94,28 @@ is_classical = True
 ```
 
 
-3. `classic_guide_tree.py`
+# Step 3. Construct a MEMC guide tree
+
+`memc_guide_tree.py` takes three arguments: 
+(1) a path to a distance matrix, (2) a path to a TSP solution, and (3) a path to save the output.
+
+```python
+from memc_guide_tree import MEMCGuideTree
+
+dm_path = 'dm.txt'  # Use actual file path
+tsp_path = 'tsp.txt'  # Use actual file path
+output_path = 'output.dnd'  # Use actual file path
+
+memc = MEMCGuideTree(dm_path, tsp_path, output_path)
+memc.guide_tree_to_file()  # Save the guide tree.
+```
+
+memc_guide_tree requires `unionfind.py` implemented by [Debajyoti Nandi](https://github.com/deehzee/unionfind).
+`unionfind.py` is under the MIT license and its copy is provided in this repository with the same file name.
+
+
+---
+If you want to build a classical guide tree to compare with our tree, you can use `classic_guide_tree.py`.
 ```python
 algorithm = "upgma"  # Choose a classical algorithm.
 dm_path = "dm.txt"  # Use actual file path
