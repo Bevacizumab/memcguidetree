@@ -94,7 +94,7 @@ is_classical = True
 ```
 
 
-# Step 3. Construct a MEMC guide tree
+## Step 3. Construct a MEMC guide tree
 
 `memc_guide_tree.py` takes three arguments: 
 (1) a path to a distance matrix, (2) a path to a TSP solution, and (3) a path to save the output.
