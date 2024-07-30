@@ -118,6 +118,7 @@ memc_guide_tree requires `unionfind.py` implemented by [Debajyoti Nandi](https:/
 If you want to build a classical guide tree to compare with our tree, you can use `classic_guide_tree.py`.
 ```python
 from classic_guide_tree import GuideTree
+
 algorithm = "upgma"  # Choose a classical algorithm.
 dm_path = "dm.txt"  # Use actual file path
 output_path = "output.dnd"  # Use actual file path
