@@ -122,6 +122,7 @@ from classic_guide_tree import GuideTree
 algorithm = "upgma"  # Choose a classical algorithm.
 dm_path = "dm.txt"  # Use actual file path
 output_path = "output.dnd"  # Use actual file path
+
 gt = GuideTree(dm_path, algorithm, output_path)
 gt.guide_tree_to_file()  # Save the guide tree.
 ```
