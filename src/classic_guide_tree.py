@@ -143,6 +143,7 @@ class GuideTree:
         
     Example Usage:
     --------------
+    >>> from classic_guide_tree import GuideTree
     >>> algorithm = "upgma"
     >>> dm_path = "dm.txt"
     >>> output_path = "output.dnd"
