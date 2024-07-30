@@ -144,7 +144,7 @@ To use a specific algorithm, initialize the variable `algorithm` to one of the s
 ['complete_linkage', 'flexible', 'modified_upgma', 'single_linkage', 'upgma', 'upgmc', 'ward', 'wpgma', 'wpgmc']
 ```
 
-References to classical algorithms: 
+References to the classical algorithms: 
 
 [1] [Milligan, G.W. Ultrametric hierarchical clustering algorithms. Psychometrika 44, 343-346 (1979)](https://doi.org/10.1007/BF02294699)
 
