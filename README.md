@@ -62,10 +62,10 @@ A typical output format for four input sequences:
  d(3,4)
 ```
 Here, `d(i,j)` represents the distance between the *i*-th and the *j*-th sequences.  
-By default, the distances are output to three decimal places.
+MAFFT outputs distances with three decimal points by default.
 
-To modify the `WriteFloatHat2_pointer_halfmtx` function in `io.c` to print more decimal points (at least five or six) for more accurate guide trees, follow these steps.  
-To print ten decimal points, replace the following `//Old` lines in the function with `//New` lines and recompile:
+For more precise guide trees, the `WriteFloatHat2_pointer_halfmtx` function in `io.c` should be modified to print distances with greater precision (at least five or six decimal points).
+For instance, replace the following `//Old` lines in the function with `//New` lines and recompile MAFFT to print ten decimal points:
 ```c
 // Old
 fprintf( hat2p, " %#6.3f\n", max * 2.5 );
