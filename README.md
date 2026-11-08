@@ -1,5 +1,5 @@
-# The Minimum Evolution with the Molecular Clock (MEMC) Guide Tree Algorithm
-This repository contains the source code for the distance-based guide tree construction algorithm introduced in [our paper](https://doi.org/10.1101/2024.11.30.626202).
+# Minimum evolution molecular clock (MEMC) Guide Tree Algorithm
+This repository contains the source code for the distance-based guide tree construction algorithm introduced in [our paper](https://doi.org/10.1186/s12859-026-06558-1).
 Distance-based guide trees are constructed using [hierarchical clustering algorithms](https://en.wikipedia.org/wiki/Hierarchical_clustering) and are utilized in [multiple sequence alignments (MSAs)](https://en.wikipedia.org/wiki/Multiple_sequence_alignment).
 These trees determine the order in which input sequences are aligned.
 
@@ -12,7 +12,7 @@ For simplicity, we have adopted the sequence labeling convention used in [MAFFT]
 To input this guide tree into MAFFT, it must be converted to MAFFT's native tree format using a [Ruby script](https://mafft.cbrc.jp/alignment/software/newick2mafft.rb).
 
 This code also applies to various MSA tools that utilize distance-based guide trees, with simple modifications to the sequence labeling convention.
-We encourage you to make the necessary modifications and use this code for other MSA tools as long as you adhere to the included LICENSE file and provide proper citation of the code and [our paper](https://doi.org/10.1101/2024.11.30.626202).
+We encourage you to make the necessary modifications and use this code for other MSA tools as long as you adhere to the included LICENSE file and provide proper citation of the code and [our paper](https://doi.org/10.1186/s12859-026-06558-1).
 
 Tests for this guide tree algorithm can be performed using various MSA benchmarks.  
 To use [BAliBASE 3.0](https://www.lbgi.fr/balibase/), you can calculate scores using [this Git repository](https://github.com/robinhundt/bali-score) (a Rust compiler is required here, which can be installed via [rustup](https://rustup.rs/)).
@@ -199,16 +199,23 @@ Each code file contains a header explaining the applicable license.
 For more details, please refer to the LICENSE file in the project root.
 
 
+# Data availability
+You can find data relevant to our algorithm in a [Zenodo repository](https://doi.org/10.5281/zenodo.17115359).
+
+
 # Citing this work
-If you find this project useful, please cite our paper:
+If you find this project useful, you can cite our paper:
 
 ```bibtex
-@article {Park2024.11.30.626202,
-	author = {Park, Youngjun and Kim, Juhyeon and Huh, Joonsuk},
-	title = {Scalable Guide Tree Construction Using Quantum Annealing for Multiple Sequence Alignment},
-	year = {2024},
-	doi = {10.1101/2024.11.30.626202},
-	publisher = {Cold Spring Harbor Laboratory},
-	journal = {bioRxiv}
+@article{park2026minimum,
+  title={Minimum evolution molecular clock: quantum annealing for guide tree construction in multiple sequence alignment},
+  author={Park, Youngjun and Kim, Juhyeon and Huh, Joonsuk},
+  journal={BMC Bioinformatics},
+  volume={27},
+  number={1},
+  pages={262},
+  year={2026},
+  publisher={Springer},
+  doi={10.1186/s12859-026-06558-1}
 }
 ```
